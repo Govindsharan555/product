@@ -8,6 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 
 @Service("fake")
@@ -44,4 +47,25 @@ public class fakestoreservice implements ProductService  {
           ResponseEntity<genericproductdto> response = restTemplate.postForEntity(trequestURl,product, genericproductdto.class);
 return response.getBody();
       }
+
+    @Override
+    public List<genericproductdto> getallproduct() {
+        RestTemplate restTemplate = restTemplateBuilder.build();
+        ResponseEntity<fakestoreproductdto[]> response = restTemplate.getForEntity(requestURl, fakestoreproductdto[].class);
+        List<genericproductdto> answer = new ArrayList<>();
+
+        for (fakestoreproductdto fakestoreproductdto : Objects.requireNonNull(response.getBody())) {
+            genericproductdto product = new genericproductdto();
+            product.setTitle(fakestoreproductdto.getTitle());
+            product.setImage(fakestoreproductdto.getImage());
+            product.setCategory(fakestoreproductdto.getCategory());
+            product.setDescriptions(fakestoreproductdto.getDescriptions());
+            product.setPrice(fakestoreproductdto.setPrice());
+
+            answer.add(product);
+        }
+
+return answer;
+    }
+
 }

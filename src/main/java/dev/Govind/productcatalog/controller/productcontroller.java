@@ -7,7 +7,7 @@ import dev.Govind.productcatalog.services.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.*;
+import java.util.*;
 
 @RestController
 @RequestMapping("/products")
@@ -24,6 +24,14 @@ public genericproductdto getproductbyid(@PathVariable("id") Long id)
 {
     return productService.getproductbyid(id);
 }
+
+@GetMapping
+public List<genericproductdto> getallproduct()
+    {
+return  List.of(new genericproductdto(),
+        new genericproductdto()) ;
+    }
+
 @PostMapping
 public genericproductdto createProduct(@RequestBody genericproductdto product)
 {
