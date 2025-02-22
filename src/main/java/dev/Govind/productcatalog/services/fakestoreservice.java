@@ -14,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 public class fakestoreservice implements ProductService  {
 
    private String requestURl="https://fakestoreapi.com/products/{id}";
+    private String trequestURl="https://fakestoreapi.com/products";
 
     private RestTemplateBuilder restTemplateBuilder;
 
@@ -34,11 +35,13 @@ public class fakestoreservice implements ProductService  {
         product.setCategory(fakestoreproductdto.getCategory());
         product.setDescriptions(fakestoreproductdto.getDescriptions());
         product.setPrice(fakestoreproductdto.setPrice());
-
-
-
         return product;
-
-
     }
+
+      public genericproductdto createProduct(genericproductdto product)
+      {
+          RestTemplate restTemplate =restTemplateBuilder.build();
+          ResponseEntity<genericproductdto> response = restTemplate.postForEntity(trequestURl,product, genericproductdto.class);
+return response.getBody();
+      }
 }

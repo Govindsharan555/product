@@ -17,4 +17,9 @@ public class selfproductservice implements ProductService{
         return null;
     }
 
+    @Override
+    public genericproductdto createProduct(genericproductdto product) {
+        return null;
+    }
+
 }
