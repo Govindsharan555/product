@@ -8,18 +8,18 @@ import lombok.Setter;
 @Getter
 public class fakestoreproductdto {
 
-    private long id;
+    private String id;
     private String title;
     private double price;
     private String category;
     private String descriptions;
     private String image;
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -28,8 +28,7 @@ public genericproductdto getproductbyid(@PathVariable("id") Long id)
 @GetMapping
 public List<genericproductdto> getallproduct()
     {
-return  List.of(new genericproductdto(),
-        new genericproductdto()) ;
+  return  productService.getallproduct() ;
     }
 
 @PostMapping
@@ -38,5 +37,7 @@ public genericproductdto createProduct(@RequestBody genericproductdto product)
     System.out.println(product.getCategory());
     return productService.createProduct(product);
 }
+
+
 
 }

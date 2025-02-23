@@ -13,11 +13,20 @@ public class Product extends BaseModule {
     public void setTitle(String title) {
         this.title = title;
     }
-
+    private String id;
     private String title;
     private double price;
     private String category;
     private String descriptions;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     private String image;
 
     public double getPrice() {

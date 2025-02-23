@@ -17,7 +17,7 @@ import java.util.Objects;
 public class fakestoreservice implements ProductService  {
 
    private String requestURl="https://fakestoreapi.com/products/{id}";
-    private String trequestURl="https://fakestoreapi.com/products";
+    private String allproductrequestURl="https://fakestoreapi.com/products";
 
     private RestTemplateBuilder restTemplateBuilder;
 
@@ -33,6 +33,7 @@ public class fakestoreservice implements ProductService  {
         response.getStatusCode();
         fakestoreproductdto fakestoreproductdto =response.getBody();
         genericproductdto product =new genericproductdto();
+        product.setId(fakestoreproductdto.getId());
         product.setTitle(fakestoreproductdto.getTitle());
         product.setImage(fakestoreproductdto.getImage());
         product.setCategory(fakestoreproductdto.getCategory());
@@ -44,18 +45,19 @@ public class fakestoreservice implements ProductService  {
       public genericproductdto createProduct(genericproductdto product)
       {
           RestTemplate restTemplate =restTemplateBuilder.build();
-          ResponseEntity<genericproductdto> response = restTemplate.postForEntity(trequestURl,product, genericproductdto.class);
+          ResponseEntity<genericproductdto> response = restTemplate.postForEntity(allproductrequestURl,product, genericproductdto.class);
 return response.getBody();
       }
 
     @Override
     public List<genericproductdto> getallproduct() {
         RestTemplate restTemplate = restTemplateBuilder.build();
-        ResponseEntity<fakestoreproductdto[]> response = restTemplate.getForEntity(requestURl, fakestoreproductdto[].class);
+        ResponseEntity<fakestoreproductdto[]> response = restTemplate.getForEntity(allproductrequestURl, fakestoreproductdto[].class);
         List<genericproductdto> answer = new ArrayList<>();
 
-        for (fakestoreproductdto fakestoreproductdto : Objects.requireNonNull(response.getBody())) {
+        for (fakestoreproductdto fakestoreproductdto : response.getBody()){
             genericproductdto product = new genericproductdto();
+            product.setId(fakestoreproductdto.getId());
             product.setTitle(fakestoreproductdto.getTitle());
             product.setImage(fakestoreproductdto.getImage());
             product.setCategory(fakestoreproductdto.getCategory());
